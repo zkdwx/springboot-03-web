@@ -9,6 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -64,6 +69,13 @@ public class EmployeeController {
     public String deleteEmp(@PathVariable("id")Integer id){
         employeeDao.delete(id);
         return "redirect:/emps";
+    }
+
+    //注销
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/index.html";
     }
 
 }
